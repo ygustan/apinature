@@ -34,7 +34,7 @@ module.exports = {
     postQuiz: function(req, res, next){
 
         const nom = req.body.nom;
-        const date = '10/10/2020';
+        const date = Date.now();
         const typeId = req.body.typeId;
 
         models.quiz.create({

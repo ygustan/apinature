@@ -28,7 +28,7 @@ CREATE TABLE Actualites(
 CREATE TABLE Categorie_actualites(
    Id_catego_actu INT NOT NULL AUTO_INCREMENT,
    Nom_categorie VARCHAR(50) NOT NULL,
-   PRIMARY KEY(Id_catogo_actu)
+   PRIMARY KEY(Id_catego_actu)
 );
 
 CREATE TABLE Type_quiz(

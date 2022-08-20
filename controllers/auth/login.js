@@ -13,6 +13,7 @@ module.exports = {
         const password = req.body.password;
 
         models.utilisateurs.findOne({
+            attributes: ['Id_utilisateur', 'Nom', 'Prenom', 'Email', 'Date_naissance', 'Date_enregistrement', 'Image_utilisateur'],
             where: { Email: email },
             include: [{
                 model: models.role
@@ -23,18 +24,10 @@ module.exports = {
                 bcrypt.compare(password, user.Password, function(errBycrypt, resBycrypt){
                     if(resBycrypt){
                         const token = jwtUtils.signUserToken(user);
-                        //const refreshToken = jwtUtils.signUserRefreshToken(user);
-                        /*
-                        models.utilisateurs.update({
-                            RefreshToken: refreshToken
-                        }, {
-                            where: { Id_utilisateur: user.Id_utilisateur }
-                        })
-                        */
                         return res.status(200).json({
                             'Token': "Bearer "+token,
-                            // 'RefreshToken': "Bearer "+refreshToken,
-                            'Id_utilisateur': user.Id_utilisateur
+                            'Id_utilisateur': user.Id_utilisateur,
+                            'user': user
                         });
                         
                     } else {

@@ -44,7 +44,7 @@ module.exports = {
         const title = req.body.title;
         const contenu = req.body.contenu;
         const categorie = req.body.categorie;
-        const date = '10/10/2020';
+        const date = Date.now();
         // Assigne post to categorie
 
         models.actualites.create({

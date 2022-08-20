@@ -56,7 +56,8 @@ module.exports = {
         const password = req.body.password;
         const dateNaissance = req.body.dateNaissance;
         const imageUtilisateur = req.body.imageUtilisateur;
-        const roleId = 1;
+        const roleId = req.body.roleId;
+        const enregistrement = Date.now();
 
         models.utilisateurs.findOne({
             attributes: ['Email'],
@@ -70,7 +71,7 @@ module.exports = {
                         Email: email,
                         Password: passwordCrypted,
                         Date_naissance: dateNaissance,
-                        Date_enregistrement: '01/01/1990',
+                        Date_enregistrement: enregistrement,
                         Image_utilisateur: imageUtilisateur
                     })
                     .then(function(user){
@@ -99,6 +100,8 @@ module.exports = {
     },
 
     updateUserById: function(req, res, next){
+
+        const { id } = req.params;
 
         const nom = req.body.nom;
         const prenom = req.body.prenom;

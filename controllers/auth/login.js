@@ -13,10 +13,10 @@ module.exports = {
         const password = req.body.password;
 
         models.utilisateurs.findOne({
-            attributes: ['Id_utilisateur', 'Nom', 'Prenom', 'Email', 'Date_naissance', 'Date_enregistrement', 'Image_utilisateur'],
             where: { Email: email },
             include: [{
-                model: models.role
+                model: models.role,
+                through: { attributes: [] }
             }]
         })
         .then(function(user){
@@ -24,6 +24,7 @@ module.exports = {
                 bcrypt.compare(password, user.Password, function(errBycrypt, resBycrypt){
                     if(resBycrypt){
                         const token = jwtUtils.signUserToken(user);
+                        user.Password = '';
                         return res.status(200).json({
                             'Token': "Bearer "+token,
                             'Id_utilisateur': user.Id_utilisateur,

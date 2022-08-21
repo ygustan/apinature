@@ -7,13 +7,13 @@ const { ctrlUtilisateur , ctrlRole, ctrlScore, ctrlControl } = require('../contr
 // Route :: Utilisateur
 
 router.route('/utilisateur')
-    .get(ctrlUtilisateur.getAllUsers)
+    .get(jwtUtils.authenticateToken, ctrlControl.autorizationAdmin, ctrlUtilisateur.getAllUsers)
     .post(ctrlUtilisateur.postUser);
 
 router.route('/utilisateur/:id')
-    .get(ctrlUtilisateur.getUserById)
-    .put(ctrlUtilisateur.updateUserById)
-    .delete(ctrlUtilisateur.deleteUserById);
+    .get(jwtUtils.authenticateToken, ctrlControl.autorizationUser, ctrlUtilisateur.getUserById)
+    .put(jwtUtils.authenticateToken, ctrlControl.autorizationUser, ctrlUtilisateur.updateUserById)
+    .delete(jwtUtils.authenticateToken, ctrlControl.autorizationUser, ctrlUtilisateur.deleteUserById);
 
 
 // Route :: Utilisateur -> Score

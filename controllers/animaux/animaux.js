@@ -1,4 +1,5 @@
 const models = require('../../models');
+const myxss = require('../../utils/xss.utils');
 
 module.exports = {
 
@@ -40,15 +41,15 @@ module.exports = {
 
     postAnimal: function(req, res, next){
 
-        const image = req.body.image;
-        const nom = req.body.nom;
-        const etat = req.body.etat;
-        const description = req.body.description;
-        const caracteristique = req.body.caracteristique;
-        const esperance = req.body.esperanceVie;
-        const population = req.body.population;
-        const poids = req.body.poids;
-        const taille = req.body.taille;
+        const image = myxss.process(req.body.image);
+        const nom = myxss.process(req.body.nom);
+        const etat = myxss.process(req.body.etat);
+        const description = myxss.process(req.body.description);
+        const caracteristique = myxss.process(req.body.caracteristique);
+        const esperance = myxss.process(req.body.esperanceVie);
+        const population = myxss.process(req.body.population);
+        const poids = myxss.process(req.body.poids);
+        const taille = myxss.process(req.body.taille);
         const regimeId = req.body.regimeId;
         const categorieId = req.body.categorieId;
         const habitatId = req.body.habitatId;
@@ -87,15 +88,15 @@ module.exports = {
 
         const { id } = req.params;
 
-        const image = req.body.image;
-        const nom = req.body.nom;
-        const etat = req.body.etat;
-        const description = req.body.description;
-        const caracteristique = req.body.caracteristique;
-        const esperance = req.body.esperanceVie;
-        const population = req.body.population;
-        const poids = req.body.poids;
-        const taille = req.body.taille;
+        const image = myxss.process(req.body.image);
+        const nom = myxss.process(req.body.nom);
+        const etat = myxss.process(req.body.etat);
+        const description = myxss.process(req.body.description);
+        const caracteristique = myxss.process(req.body.caracteristique);
+        const esperance = myxss.process(req.body.esperanceVie);
+        const population = myxss.process(req.body.population);
+        const poids = myxss.process(req.body.poids);
+        const taille = myxss.process(req.body.taille);
         const regimeId = req.body.regimeId;
         const categorieId = req.body.categorieId;
 

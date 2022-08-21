@@ -18,6 +18,10 @@ const ctrlTypeQuiz = require('./quiz/type_quiz');
 const ctrlQuestion = require('./quiz/questions_quiz');
 const ctrlReponse = require('./quiz/reponses_quiz');
 
+const ctrlNewsletter = require('./store/newsletter');
+const ctrlProduit = require('./store/produit');
+const ctrlCategorieProduit = require('./store/categorie_produit');
+
 module.exports = { 
     ctrlUtilisateur,
     ctrlRole,
@@ -33,5 +37,8 @@ module.exports = {
     ctrlQuiz,
     ctrlTypeQuiz,
     ctrlReponse,
-    ctrlQuestion
+    ctrlQuestion,
+    ctrlNewsletter,
+    ctrlCategorieProduit,
+    ctrlProduit
 };

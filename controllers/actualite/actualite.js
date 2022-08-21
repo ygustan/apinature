@@ -1,4 +1,5 @@
 const models = require('../../models');
+const myxss = require('../../utils/xss.utils');
 
 module.exports = {
 
@@ -41,8 +42,8 @@ module.exports = {
 
     postActualite: function(req, res, next){
 
-        const title = req.body.title;
-        const contenu = req.body.contenu;
+        const title = myxss.process(req.body.title);
+        const contenu = myxss.process(req.body.contenu);
         const categorie = req.body.categorie;
         const date = Date.now();
         // Assigne post to categorie
@@ -53,7 +54,7 @@ module.exports = {
             Date_actualite: date
         })
         .then(function(actualite){
-            models.categorie_actualites.create({ Id_actualite: actualite.Id_actualite , Id_catogo_actu: categorie })
+            models.lien_categorie.create({ Id_actualite: actualite.Id_actualite , Id_catego_actu: categorie })
             .then(function(categorie){
                 if(categorie){
                     return res.status(200).json(actualite);
@@ -74,8 +75,8 @@ module.exports = {
 
         const { id } = req.params;
         
-        const title = req.body.title;
-        const contenu = req.body.contenu;
+        const title = myxss.process(req.body.title);
+        const contenu = myxss.process(req.body.contenu);
 
         models.actualites.update({
             Titre_actualite: title,

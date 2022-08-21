@@ -10,6 +10,8 @@ const routeAnimaux = require('./routes/animaux.js');
 const routeActualite = require('./routes/actualite.js');
 const routeQuiz = require('./routes/quiz.js');
 const routeAuth = require('./routes/auth.js');
+const routeProduit = require('./routes/produit');
+const routeNewsletter = require('./routes/newsletter');
 
 // Settings
 const PORT = process.env.PORT || 8888;
@@ -28,6 +30,8 @@ app.use('/api/v1/', routeAnimaux);
 app.use('/api/v1/', routeActualite);
 app.use('/api/v1/', routeAuth);
 app.use('/api/v1/', routeQuiz);
+app.use('/api/v1/', routeProduit);
+app.use('/api/v1/', routeNewsletter);
 
 app.use('/static', express.static(path.join(__dirname,'public')));
 

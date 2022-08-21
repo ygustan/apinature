@@ -3,8 +3,8 @@ const myxss = require('../../utils/xss.utils');
 
 module.exports = {
 
-    getAllCategorieActualites: function(req, res, next){
-        models.categorie_actualites.findAll({})
+    getAllCategorieProduit: function(req, res, next){
+        models.categorie_produit.findAll({})
         .then(function(categories){
             return res.status(200).json(categories);
         })
@@ -13,12 +13,12 @@ module.exports = {
         });
     },
 
-    getCategorieActualiteById: function(req, res, next){
+    getCategorieProduitById: function(req, res, next){
 
         const { id } = req.params;
 
-        models.categorie_actualites.findOne({
-            where:{ Id_catego_actu: id }
+        models.categorie_produit.findOne({
+            where:{ Id_catego_produit: id }
         })
         .then(function(categorie){
             if(categorie){
@@ -32,11 +32,11 @@ module.exports = {
         });
     },
 
-    postCategorieActualite: function(req, res, next){
+    postCategorieProduit: function(req, res, next){
 
         const nom = myxss.process(req.body.nom);
 
-        models.categorie_actualites.create({
+        models.categorie_produit.create({
             Nom_categorie: nom
         })
         .then(function(categorie){
@@ -47,16 +47,16 @@ module.exports = {
         });
     },
 
-    updateCategorieActualiteById: function(req, res, next){
+    updateCategorieProduitById: function(req, res, next){
 
         const { id } = req.params;
 
         const nom = myxss.process(req.body.nom);
 
-        models.categorie_actualites.update({
+        models.categorie_produit.update({
             Nom_categorie: nom
         }, {
-            where:{ Id_catego_actu: id }
+            where:{ Id_catego_produit: id }
         })
         .then(function(categorie){
             if(categorie){
@@ -70,12 +70,12 @@ module.exports = {
         });
     },
 
-    deleteCategorieActualiteById: function(req, res, next){
+    deleteCategorieProduitById: function(req, res, next){
 
         const { id } = req.params;
  
-        models.categorie_actualites.destroy({
-            where:{ Id_catego_actu: id }
+        models.categorie_produit.destroy({
+            where:{ Id_catego_produit: id }
         })
         .then(function(){
             return res.status(200).json({'Reponse':'La categorie a été supprimé'});

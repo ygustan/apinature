@@ -1,4 +1,5 @@
 const models = require('../../models');
+const myxss = require('../../utils/xss.utils');
 
 module.exports = {
 
@@ -33,7 +34,7 @@ module.exports = {
 
     postReponse: function(req, res, next){
 
-        const description = req.body.description;
+        const description = myxss.process(req.body.description);
         const reponse = req.body.reponse;
         const questionId = req.body.questionId;
 
@@ -58,7 +59,7 @@ module.exports = {
 
         const { id } = req.params;
 
-        const description = req.body.description;
+        const description = myxss.process(req.body.description);
         const reponse = req.body.reponse;
 
         models.reponses_quiz.update({

@@ -1,4 +1,5 @@
 const models = require('../../models');
+const myxss = require('../../utils/xss.utils');
 
 module.exports = {
 
@@ -37,7 +38,7 @@ module.exports = {
 
     postTypeQuiz: function(req, res, next){
 
-        const nom = req.body.nom;
+        const nom = myxss.process(req.body.nom);
 
         models.type_quiz.create({
             Nom_type: nom
@@ -53,7 +54,7 @@ module.exports = {
     updateTypeQuizById: function(req, res, next){
 
         const { id } = req.params;
-        const nom = req.body.nom;
+        const nom = myxss.process(req.body.nom);
 
         models.type_quiz.update({
             Nom_type: nom

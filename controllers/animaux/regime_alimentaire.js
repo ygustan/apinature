@@ -1,4 +1,5 @@
 const models = require('../../models');
+const myxss = require('../../utils/xss.utils');
 
 module.exports = {
 
@@ -37,8 +38,8 @@ module.exports = {
 
     postRegimeAlimentaire: function(req, res, next){
 
-        const nom = req.body.nom;
-        const description = req.body.description;
+        const nom = myxss.process(req.body.nom);
+        const description = myxss.process(req.body.description);
 
         models.regime_alimentaire.create({
             Nom_regime: nom,
@@ -56,8 +57,8 @@ module.exports = {
 
         const { id } = req.params;
 
-        const nom = req.body.nom;
-        const description = req.body.description;
+        const nom = myxss.process(req.body.nom);
+        const description = myxss.process(req.body.description);
 
         models.regime_alimentaire.update({
             Nom_regime: nom,

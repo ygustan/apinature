@@ -1,6 +1,8 @@
 
 const models = require('../../models');
 const bcrypt = require('bcrypt');
+const myxss = require('../../utils/xss.utils');
+const regex_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 module.exports = {
 
@@ -50,14 +52,16 @@ module.exports = {
 
     postUser: function(req, res, next){
 
-        const nom = req.body.nom;
-        const prenom = req.body.prenom;
-        const email = req.body.email;
-        const password = req.body.password;
-        const dateNaissance = req.body.dateNaissance;
-        const imageUtilisateur = req.body.imageUtilisateur;
+        const nom = myxss.process(req.body.nom);
+        const prenom = myxss.process(req.body.prenom);
+        const email = myxss.process(req.body.email);
+        const password = myxss.process(req.body.password);
+        const dateNaissance = myxss.process(req.body.dateNaissance);
+        const imageUtilisateur = myxss.process(req.body.imageUtilisateur);
         const roleId = req.body.roleId;
         const enregistrement = Date.now();
+
+        if(!regex_email.test(email)) return res.status(500).json({'Error': 'Format du mail'});
 
         models.utilisateurs.findOne({
             attributes: ['Email'],
@@ -103,10 +107,10 @@ module.exports = {
 
         const { id } = req.params;
 
-        const nom = req.body.nom;
-        const prenom = req.body.prenom;
-        const dateNaissance = req.body.dateNaissance;
-        const imageUtilisateur = req.body.imageUtilisateur;
+        const nom = myxss.process(req.body.nom);
+        const prenom = myxss.process(req.body.prenom);
+        const dateNaissance = myxss.process(req.body.dateNaissance);
+        const imageUtilisateur = myxss.process(req.body.imageUtilisateur);
 
         models.utilisateurs.update({
             Nom: nom,

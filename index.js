@@ -2,6 +2,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const path = require('path');
 
 // Importation des routes 
 const routeUtilisateur = require('./routes/utilisateur.js');
@@ -27,6 +28,8 @@ app.use('/api/v1/', routeAnimaux);
 app.use('/api/v1/', routeActualite);
 app.use('/api/v1/', routeAuth);
 app.use('/api/v1/', routeQuiz);
+
+app.use('/static', express.static(path.join(__dirname,'public')));
 
 app.get('/', (req, res) => {
     res.header('Content-type','text/html');
